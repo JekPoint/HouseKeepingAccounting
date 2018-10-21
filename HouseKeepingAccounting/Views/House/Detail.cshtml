@@ -1,0 +1,150 @@
+﻿@model HouseKeepingAccounting.Models.Catalog.AssetDetailModel
+
+<div class="container">
+    <div class="page-header clearfix">
+        <h2 class="text-muted">Дом находящийся по адресу 
+            @if (@Model != null)
+            {
+                @Model.FullAdress
+            }
+            </h2>
+    </div>
+</div>
+
+
+<div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#counterInfoChang">
+                    Изменить данные счётчика
+                </a>
+            </h4>
+        </div>
+        <div id="counterInfoChang" class="panel-collapse collapse">
+            <div class="panel-body">
+                <table class="table tab-content">
+                    <thead>
+                    <tr>
+                        <th>Заводской номер счётчика</th>
+                        <th>Дата окончания поверки</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        @using (Html.BeginForm("CounterInfoChange", "House", FormMethod.Post))
+                        {
+                            @Html.HiddenFor(a => a.HouseId)
+                            <tr class="table">
+                                <td class="alert-info">
+                                    @Html.TextBoxFor(place => place.FactoryNumder)
+                                </td>
+                                <td class="alert-info">
+                                    @Html.EditorFor(model => model.VerificationTimeOver)
+                                </td>
+                                <td class="alert-info">
+                                    <button class="btn btn-default alert-info" type="submit">
+                                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#houseAdressChang">
+                    Изменить адрес дома
+                </a>
+            </h4>
+        </div>
+        <div id="houseAdressChang" class="panel-collapse collapse">
+            <div class="panel-body">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                commodo consequat.
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="jumbotron">
+    <h3>История подачи показаний</h3>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#indicationAdd">
+                    Ввести показания счётчика
+                </a>
+            </h4>
+        </div>
+        <div id="indicationAdd" class="panel-collapse collapse">
+            <div class="panel-body">
+                <table class="table tab-content">
+                    <thead>
+                        <tr>
+                            <th>Дата подачи</th>
+                            <th>Предидущие показания</th>
+                            <th>Текущие показания</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (@Model != null)
+                        {
+                            using (Html.BeginForm("IndicationAdd", "House", FormMethod.Post))
+                            {
+                                @Html.HiddenFor(a => a.HouseId)
+                                @Html.HiddenFor(a => a.LastIndication)
+                                <tr class="table">
+                                    <td class="alert-info">
+                                        @Model.CurrentDate.ToLongDateString()
+                                    </td>
+                                    <td class="alert-info">
+                                        @Model.LastIndication
+                                    </td>
+                                    <td class="alert-info">
+                                        @Html.TextBoxFor(model => model.NewIndication)
+                                    </td>
+                                    <td class="alert-info">
+                                        <button class="btn btn-default alert-info" type="submit">
+                                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div id="assetsTable">
+        <table class="table table-condensed" id="catalogIndexTable">
+            <thead>
+            <tr>
+                <th>Дата</th>
+                <th>Показания</th>
+                <th>Адрес</th>
+            </tr>
+            </thead>
+            <tbody>
+                @if (@Model != null)
+                {
+                     foreach (var asset in Model.Asset)
+                     {
+                         <tr>
+                             <td class="">@asset.IndicationDate</td>
+                             <td class="">@asset.Indication</td>
+                             <td class="">@asset.FullAdress</td>
+                         </tr>
+                     }
+                }
+                </tbody>
+        </table>
+    </div>
+</div>
