@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using HouseData.Interfaces;
 using HouseKeepingAccounting.Models.Catalog;
 using Microsoft.AspNetCore.Mvc;
@@ -63,6 +64,9 @@ namespace HouseKeepingAccounting.Controllers
                 VerificationTimeOver = house.Counter.VerificationTimeOver,
                 FactoryNumder = house.Counter.FactoryNumber,
                 HouseId = house.Id,
+                HouseCity = house.City,
+                HouseNumber = house.Number,
+                HousePlace = house.Street,
                 CurrentDate = DateTime.Now,
                 LastIndication = house.Counter.Indications.Last().CurrentIndication,
                 Asset = listingResult
@@ -103,6 +107,18 @@ namespace HouseKeepingAccounting.Controllers
                 return RedirectToAction("Index");
 
             _houseAssets.IndicationAdd(houseId, DateTime.Now, newIndication);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult HouseInfoEdit(string houseCity, string housePlace, string HouseNumber, int houseId)
+        {
+            if (string.IsNullOrEmpty(houseCity) ||
+                string.IsNullOrEmpty(housePlace) ||
+                string.IsNullOrEmpty(HouseNumber))
+                return RedirectToAction("Index");
+
+            _houseAssets.HouseInfoChange(houseId, houseCity, housePlace, HouseNumber);
             return RedirectToAction("Index");
         }
 

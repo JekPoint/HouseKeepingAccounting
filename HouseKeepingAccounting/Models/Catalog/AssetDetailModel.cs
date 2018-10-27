@@ -14,7 +14,13 @@ namespace HouseKeepingAccounting.Models.Catalog
 
         public int LastIndication { get; set; }
 
-        public DateTime CurrentDate { get; set; }   
+        public DateTime CurrentDate { get; set; }
+
+        public string HouseCity { get; set; }
+
+        public string HousePlace { get; set; }
+
+        public string HouseNumber { get; set; }
 
         [DataType(DataType.Date)]
         public DateTime? VerificationTimeOver { get; set; }  

@@ -180,6 +180,20 @@ namespace HouseServices
             _context.SaveChanges();
         }
 
+        public async Task<string> HouseInfoChange(int houseId, string city, string street, string number)
+        {
+            var house = GetHousesById(houseId);
+            if (house == null)
+                return "Not add. House Not Present.";
+
+            house.City = city;
+            house.Street = street;
+            house.Number = number;
+            await _context.SaveChangesAsync();
+            return "OK";
+
+        }
+
         public void IndicationAdd(int houseId, DateTime dateIndication, int newIndication)
         {
             var house = GetHousesById(houseId);

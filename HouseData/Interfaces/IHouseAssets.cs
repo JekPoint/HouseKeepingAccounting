@@ -78,6 +78,17 @@ namespace HouseData.Interfaces
         void CounterInfoChange(int houseId, string factoryNumber, DateTime verificationTimeOver);
 
         /// <summary>
+        /// Изменение информации о доме
+        /// </summary>
+        /// <param name="houseId">ID дома</param>
+        /// <param name="city">Город</param>
+        /// <param name="street">Улица</param>
+        /// <param name="number">Номер дома</param>
+        /// <returns></returns>
+        Task<string> HouseInfoChange(int houseId, string city, string street, string number);
+
+
+        /// <summary>
         /// Добавление показаний счёцика
         /// </summary>
         /// <param name="houseId">ID дома</param>

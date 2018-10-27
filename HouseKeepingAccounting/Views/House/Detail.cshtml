@@ -31,23 +31,23 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @using (Html.BeginForm("CounterInfoChange", "House", FormMethod.Post))
-                        {
-                            @Html.HiddenFor(a => a.HouseId)
-                            <tr class="table">
-                                <td class="alert-info">
-                                    @Html.TextBoxFor(place => place.FactoryNumder)
-                                </td>
-                                <td class="alert-info">
-                                    @Html.EditorFor(model => model.VerificationTimeOver)
-                                </td>
-                                <td class="alert-info">
-                                    <button class="btn btn-default alert-info" type="submit">
-                                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                                    </button>
-                                </td>
-                            </tr>
-                        }
+                    @using (Html.BeginForm("CounterInfoChange", "House", FormMethod.Post))
+                    {
+                        @Html.HiddenFor(a => a.HouseId)
+                        <tr class="table">
+                            <td class="alert-info">
+                                @Html.TextBoxFor(place => place.FactoryNumder)
+                            </td>
+                            <td class="alert-info">
+                                @Html.EditorFor(model => model.VerificationTimeOver)
+                            </td>
+                            <td class="alert-info">
+                                <button class="btn btn-default alert-info" type="submit">
+                                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                </button>
+                            </td>
+                        </tr>
+                    }
                     </tbody>
                 </table>
             </div>
@@ -64,10 +64,41 @@
         </div>
         <div id="houseAdressChang" class="panel-collapse collapse">
             <div class="panel-body">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                commodo consequat.
+                <form asp-controller="House" asp-action="HouseInfoEdit" asp-antiforgery="true">
+                    @Html.HiddenFor(a => a.HouseId)
+                    <table class="table tab-content">
+                        <tbody>
+                            <tr class="table">
+                                <td class="alert-info">
+                                    <label asp-for="HouseCity">Город</label>
+                                </td>
+                                <td class="alert-info">
+                                    <input type="text" asp-for="HouseCity" />
+                                </td>
+                            </tr>
+
+                            <tr class="table">
+                                <td class="alert-info">
+                                    <label asp-for="HousePlace">Улица</label>
+                                </td>
+                                <td class="alert-info">
+                                    <input asp-for="HousePlace" />
+                                </td>
+                            </tr>
+                            <tr class="table">
+                                <td class="alert-info">
+                                    <label asp-for="HouseNumber">Номер дома</label>
+                                </td>
+                                <td class="alert-info">
+                                    <input asp-for="HouseNumber" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button class="btn btn-default alert-info" type="submit" value="Save">
+                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                    </button>
+                </form>
             </div>
         </div>
     </div>
