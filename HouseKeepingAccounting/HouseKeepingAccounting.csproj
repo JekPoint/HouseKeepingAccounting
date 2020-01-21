@@ -11,9 +11,4 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.4" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\HouseData\HouseData.csproj" />
-    <ProjectReference Include="..\HouseServices\HouseServices.csproj" />
-  </ItemGroup>
-
 </Project>
