@@ -1,16 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using HouseKeepingAccounting.DAL.Models;
 
-namespace HouseKeepingAccounting.DAL.Models
+namespace HouseKeepingAccounting.BaseApi.ViewModel
 {
-    public class House
+    public class HouseViewModel
     {
-        [Key]
         public int Id { get; set; }
+
         public string CityName { get; set; }
+        
         public string StreetName { get; set; }
 
         public string HomeNumber { get; set; }
 
-        public Counter Counter { get; set; }
+        public CounterViewModel Counter { get; set; }
     }
 }

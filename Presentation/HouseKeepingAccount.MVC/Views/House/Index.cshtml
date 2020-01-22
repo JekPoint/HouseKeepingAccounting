@@ -1,0 +1,68 @@
+﻿@model HouseKeepingAccounting.MVC.Models.Catalog.AssetIndexModel
+
+@{
+    ViewBag.Title = "Каталог доступных домов";
+}
+
+<div id="assets">
+    <h3>@ViewBag.Title</h3>
+    <div id="assetsTable">
+        <table class="table tab-content" id="houseInsetTable">
+            <thead>
+            <tr>
+                <th>Город</th>
+                <th>Улица</th>
+                <th>Номер</th>
+            </tr>
+            </thead>
+            <tbody>
+            @using (Html.BeginForm("PlaceNewHouse", "House", FormMethod.Post))
+            {
+                <tr class="table">
+                    <td class="alert-info">@Html.TextBoxFor(place => place.NewHouseCity)</td>
+                    <td class="alert-info">@Html.TextBoxFor(place => place.NewHouseStreet)</td>
+                    <td class="alert-info">@Html.TextBoxFor(place => place.NewHouseNumber)</td>
+                    <td class="alert-info">
+                        <button  class="btn btn-default alert-info" type="submit">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        </button>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+        <table class="table table-condensed" id="catalogIndexTable">
+            <thead>
+            <tr>
+                <th>№</th>
+                <th>Адрес</th>
+                <th>Дата окончания поверки счётчика</th>
+                <th>Серийный номер счётчика</th>
+                <th>Последние показания</th>
+                <th>Дата подачи последних показаний</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var asset in Model.Assets)
+            {
+                <tr class="assetRow">
+                    <td class="">@asset.Id</td>
+                    <td class="">
+                        <a asp-controller="House" asp-action="Detail" asp-route-id="@asset.Id">
+                            @asset.HouseAddress
+                        </a>
+                    </td>
+                    <td class="">@asset.HouseCounterVerificationTimeOver</td>
+                    <td class="">@asset.HouseCounterFactorNumber</td>
+                    <td class="">@asset.HouseCounterLastIndication</td>
+                    <td class="">@asset.HouseCounterLastIndicationDate</td>
+                    <td>
+                        <a class="btn btn-danger" role="button" asp-controller="House"
+                           asp-action="RemoveHouse" asp-route-id="@asset.Id"></a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
