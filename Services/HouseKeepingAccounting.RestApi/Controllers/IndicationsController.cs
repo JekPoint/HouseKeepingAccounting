@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using HouseKeepingAccounting.BaseApi.Services;
+using HouseKeepingAccounting.DAL.Models;
+using HouseKeepingAccounting.RestApi.Services;
+using Microsoft.AspNet.OData;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using HouseKeepingAccounting.DAL.Models;
-using Microsoft.AspNet.OData;
 
-namespace HouseKeepingAccounting.BaseApi.Controllers
+namespace HouseKeepingAccounting.RestApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class IndicationsController : ControllerBase
     {

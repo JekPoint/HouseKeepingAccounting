@@ -1,10 +1,9 @@
 ﻿using System;
 
-namespace HouseKeepingAccounting.BaseApi.ViewModel
+namespace HouseKeepingAccounting.RestApi.ViewModel
 {
     public class CounterAddModel
     {
-
         public string FactoryNumber { get; set; }
         
         public DateTime VerificationTimeOver { get; set; }

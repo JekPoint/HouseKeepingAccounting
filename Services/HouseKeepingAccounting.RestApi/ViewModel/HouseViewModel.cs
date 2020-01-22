@@ -1,6 +1,4 @@
-﻿using HouseKeepingAccounting.DAL.Models;
-
-namespace HouseKeepingAccounting.BaseApi.ViewModel
+﻿namespace HouseKeepingAccounting.RestApi.ViewModel
 {
     public class HouseViewModel
     {

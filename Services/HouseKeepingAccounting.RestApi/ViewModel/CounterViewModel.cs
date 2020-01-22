@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using HouseKeepingAccounting.DAL.Models;
 
-namespace HouseKeepingAccounting.BaseApi.ViewModel
+namespace HouseKeepingAccounting.RestApi.ViewModel
 {
     public class CounterViewModel
     {
@@ -12,6 +12,8 @@ namespace HouseKeepingAccounting.BaseApi.ViewModel
 
         public DateTime VerificationTimeOver { get; set; }
 
-        public virtual ICollection<Indication> Indications { get; set; }
+        public List<Indication> Indications { get; set; }
+
+        public int HouseId { get; set; }
     }
 }

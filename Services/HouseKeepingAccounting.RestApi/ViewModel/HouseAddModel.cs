@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace HouseKeepingAccounting.BaseApi.ViewModel
+namespace HouseKeepingAccounting.RestApi.ViewModel
 {
     public class HouseAddModel
     {

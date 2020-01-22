@@ -27,5 +27,7 @@ namespace HouseKeepingAccounting.DAL.Models
 
         [ForeignKey("HouseId")]
         public House House { get; set; }
+
+        public int HouseId { get; set; }
     }
 }

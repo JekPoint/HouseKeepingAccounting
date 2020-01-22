@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
-using HouseKeepingAccounting.BaseApi.Services;
 using HouseKeepingAccounting.DAL;
+using HouseKeepingAccounting.RestApi.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace HouseKeepingAccounting.BaseApi.Base
+namespace HouseKeepingAccounting.RestApi.Base
 {
     public abstract class BaseService<T>
         where T : class

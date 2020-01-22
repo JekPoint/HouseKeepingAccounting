@@ -1,49 +1,87 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-using HouseKeepingAccounting.BaseApi.Services;
+using HouseKeepingAccounting.DAL;
+using HouseKeepingAccounting.DAL.Models;
+using HouseKeepingAccounting.RestApi.Base;
+using HouseKeepingAccounting.RestApi.Services;
+using HouseKeepingAccounting.RestApi.ViewModel;
+using Microsoft.AspNet.OData;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using HouseKeepingAccounting.DAL.Models;
-using Microsoft.AspNet.OData;
 
-namespace HouseKeepingAccounting.BaseApi.Controllers
+namespace HouseKeepingAccounting.RestApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class CountersController : ControllerBase
     {
         private readonly CountersService _service;
+        private readonly HouseContext _houseContext;
 
-        public CountersController(CountersService service)
+        public CountersController(CountersService service, HouseContext houseContext)
         {
             _service = service;
+            _houseContext = houseContext;
         }
 
         [HttpGet]
         [EnableQuery]
-        public IEnumerable<Counter> GetCounter()
+        public IQueryable<Counter> GetCounter()
         {
-            return _service.GetModelDbSet();
+            return _houseContext.Counters;
         }
 
         [HttpPut]
-        public async Task<int> UpdateCounter(Counter counter)
+        public async Task<ActionResult<int>> UpdateCounter(CounterViewModel counter)
         {
-            return await _service.UpdateModel(counter);
+            var response = await _service.UpdateCounter(counter);
+            if (response.Status == ServiceResponseStatus.NotFound)
+            {
+                return NotFound(response.Result);
+            }
+
+            if (response.Status == ServiceResponseStatus.Ok && response.Result is int result)
+            {
+                return result;
+            }
+
+            return BadRequest(response.Result);
         }
 
         [HttpPost]
-        public async Task<ActionResult<Counter>> AddCounter(Counter counter)
+        public async Task<ActionResult<CounterViewModel>> AddCounter(CounterAddModel model)
         {
-            return await _service.AddModel(counter);
+            var response =  await _service.AddCounter(model);
+            if (response.Status == ServiceResponseStatus.NotFound)
+            {
+                return NotFound(response.Result);
+            }
+
+            if (response.Status == ServiceResponseStatus.Ok && response.Result is CounterViewModel result)
+            {
+                return result;
+            }
+
+            return BadRequest(response.Result);
         }
 
         [HttpDelete("{id}")]
-        [EnableQuery]
-        public async Task<DbSet<Counter>> DeleteCounter(int id)
+        public async Task<ActionResult<bool>> DeleteCounter(int id)
         {
+            var response = await _service.DeleteCounter(id);
+            
+            if (response.Status == ServiceResponseStatus.NotFound)
+            {
+                return NotFound(response.Result);
+            }
 
-            return await _service.DeleteModel(id);
+            if (response.Status == ServiceResponseStatus.Ok)
+            {
+                return true;
+            }
+
+            return BadRequest(response.Result);
         }
     }
 }

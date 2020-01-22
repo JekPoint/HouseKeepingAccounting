@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "HouseKeepingAccounting.BaseApi": {
+    "HouseKeepingAccounting.RestApi": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger/index.html",

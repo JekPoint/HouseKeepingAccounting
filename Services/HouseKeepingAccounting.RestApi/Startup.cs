@@ -1,22 +1,19 @@
 using System.Linq;
-using HouseKeepingAccounting.BaseApi.Services;
 using HouseKeepingAccounting.DAL;
+using HouseKeepingAccounting.RestApi.Services;
 using Microsoft.AspNet.OData.Builder;
 using Microsoft.AspNet.OData.Extensions;
 using Microsoft.AspNet.OData.Formatter;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Net.Http.Headers;
 using Microsoft.OpenApi.Models;
-using Swashbuckle.OData;
 
-
-namespace HouseKeepingAccounting.BaseApi
+namespace HouseKeepingAccounting.RestApi
 {
     public class Startup
     {
@@ -48,6 +45,7 @@ namespace HouseKeepingAccounting.BaseApi
             services.AddScoped<CountersService>();
             services.AddScoped<HousesService>();
             services.AddScoped<IndicationsService>();
+            services.AddScoped<MapperService>();
             services.AddMvcCore(options =>
             {
                 options.EnableEndpointRouting = false;
